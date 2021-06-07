@@ -49,7 +49,7 @@ export function spawnProcess(
       if (exitCode !== 0) {
         reject(
           new SpawnError(
-            `${command} ${join(' ', args)} failed with code ${exitCode}`,
+            `${command} ${join(' ', args)} failed with code ${exitCode}\n${stdout}\n${stderr}`,
             stdout,
             stderr
           )

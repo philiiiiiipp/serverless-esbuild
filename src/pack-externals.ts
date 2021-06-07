@@ -75,7 +75,7 @@ function getProdModules(
   packageJsonPath: string,
   rootPackageJsonPath: string
 ) {
-  const packageJson = require(packageJsonPath);
+  const packageJson = require(rootPackageJsonPath);
   const prodModules = [];
 
   // only process the module stated in dependencies section
@@ -210,9 +210,8 @@ export async function packExternalModules(this: EsbuildPlugin) {
   // Fetch needed original package.json sections
   const sectionNames = packager.copyPackageSectionNames;
 
-  const rootPackageJson: Record<string, any> = this.serverless.utils.readFileSync(
-    rootPackageJsonPath
-  );
+  const rootPackageJson: Record<string, any> =
+    this.serverless.utils.readFileSync(rootPackageJsonPath);
 
   const isWorkspace = !!rootPackageJson.workspaces;
 
