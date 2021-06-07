@@ -49,7 +49,7 @@ export function spawnProcess(
       if (exitCode !== 0) {
         reject(
           new SpawnError(
-            `${command} ${join(' ', args)} failed with code ${exitCode}`,
+            `${command} ${join(' ', args)} failed with code ${exitCode}\n${stdout}\n${stderr}`,
             stdout,
             stderr
           )
@@ -123,3 +123,7 @@ export const zip = (zipPath: string, filesPathList: IFiles) => {
     zip.on('error', err => reject(err));
   });
 };
+
+export function trimExtension(entry: string) {
+  return entry.slice(0, -path.extname(entry).length);
+}
